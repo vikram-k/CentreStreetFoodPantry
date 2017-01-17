@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Centre Street Food Pantry</string>
+    <string name="name_message">Shopper Name</string>
+    <string name="size_message">Family Size</string>
+    <string name="button_send">Submit</string>
+    <string name="button_print">Print Order</string>
+    <string name="button_newOrder">Create New Order</string>
+    <string name="button_quantity">1</string>
+</resources>
