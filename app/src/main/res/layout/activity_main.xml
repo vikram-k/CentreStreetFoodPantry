@@ -11,6 +11,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_newOrder"
-            android:onClick="chooseItems" />
+            android:onClick="newOrder" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_setInventory"
+            android:onClick="setInventory" />
 
 </LinearLayout>

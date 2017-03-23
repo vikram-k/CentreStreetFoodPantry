@@ -15,8 +15,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     /** Called when the user clicks the New Order button */
-    public void chooseItems(View view) {
+    public void newOrder(View view) {
         Intent intent = new Intent(this, ListActivity.class);
+        startActivity(intent);
+    }
+
+    /** Called when the user clicks the Set Inventory button */
+    public void setInventory(View view) {
+        Intent intent = new Intent(this, SetInventoryActivity.class);
         startActivity(intent);
     }
 

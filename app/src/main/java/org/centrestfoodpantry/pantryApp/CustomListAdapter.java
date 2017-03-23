@@ -43,28 +43,6 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
     public View getView(final int position, View view, ViewGroup parent) {
 
-/*
-        LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.mylist, null, true);
-
-
-        Button plus = (Button)rowView.findViewById(R.id.buttonPlus);
-        plus.setTag(itemname[position]);
-        Button minus = (Button)rowView.findViewById(R.id.buttonMinus);
-        minus.setTag(itemname[position]);
-
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-        TextView quantitytxt = (TextView) rowView.findViewById(R.id.textView2);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
-
-        txtTitle.setText(itemname[position]);
-        txtTitle.setTextSize(28);
-        imageView.setImageResource(imgid[position]);
-        extratxt.setText("");
-        quantitytxt.setText(quantities.get(position).toString());
-
-        */
         ViewHolder holder = null;
 
         //if (view == null) {
@@ -105,32 +83,13 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         holder.item.setTextSize(28);
         holder.img.setImageResource(imgid[position]);
         holder.code.setText(quantities.get(position).toString());
-        //}
-    //else {
-    //    holder = (ViewHolder) view.getTag();
-    //}
-    //holder.code.setText(String.valueOf(quantities.get(position)));
 
     Button plus = (Button)view.findViewById(R.id.buttonPlus);
     plus.setTag(itemname[position]);
     Button minus = (Button)view.findViewById(R.id.buttonMinus);
     minus.setTag(itemname[position]);
 
-    //TextView txtTitle = (TextView) view.findViewById(R.id.item);
-    //TextView quantitytxt = (TextView) view.findViewById(R.id.textView2);
-    //ImageView imageView = (ImageView) view.findViewById(R.id.icon);
-    //TextView extratxt = (TextView) view.findViewById(R.id.textView1);
-
-
-
-    //Country country = countryList.get(position);
-    //holder.code.setText(" (" +  country.getCode() + ")");
-    //holder.name.setText(country.getName());
-    //holder.name.setChecked(country.isSelected());
-    //holder.name.setTag(country);
-
         return view;
-        //return rowView;
 
 
 

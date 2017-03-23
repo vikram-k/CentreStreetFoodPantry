@@ -1,6 +1,7 @@
 package org.centrestfoodpantry.pantryApp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,45 +11,38 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ListActivity extends AppCompatActivity {
 
-    String shopperName = "";
-    String familySize = "";
-    HashMap foodItems = new HashMap();
-    ArrayList<Integer> quantities = new ArrayList<Integer>();
-    CustomListAdapter adapter;
+        String shopperName = "";
+        String familySize = "";
+        HashMap foodItems = new HashMap();
+        ArrayList<Integer> quantities = new ArrayList<Integer>();
+        CustomListAdapter adapter;
 
         ListView list;
-        String[] itemname ={
-                "Milk",
-                "Eggs",
-                "Yogurt",
-                "Mozzarella Cheese",
-                "Cheddar Cheese",
-                "American Cheese",
-                "Tofu",
-                "Broccoli",
-                "Hummus",
-                "Ground Turkey",
-                "Whole Chicken",
-                "Chicken Breast",
-                "Hot Dogs"
-        };
+        public static final String PREFS_NAME = "MyPrefsFile";
 
-        Integer[] imgid={
-                R.drawable.milk, R.drawable.eggs,
-                R.drawable.yogurt, R.drawable.mozzarella_cheese,
-                R.drawable.cheddar_cheese, R.drawable.american_cheese,
-                R.drawable.tofu, R.drawable.broccoli, R.drawable.hummus,
-                R.drawable.groundturkey, R.drawable.wholechicken,
-                R.drawable.chickenbreast, R.drawable.hotdogs
+        String[] itemname;
+        Integer[] imgid = new Integer[100];
 
-        };
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_list);
+
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+
+            // Get names and images for available foods from inventory SharedPreferences
+            HashMap<String, Integer> foodItems = (HashMap) settings.getAll();
+            itemname = foodItems.keySet().toArray(new String[foodItems.keySet().size()]);
+
+            Object[] imgIdObjects = foodItems.values().toArray();
+            for (int i = 0; i < imgIdObjects.length; i++) {
+                imgid[i] = (Integer) imgIdObjects[i];
+            }
 
             for (String s: itemname) {
                 int currentQuantity = 0;
@@ -60,11 +54,9 @@ public class ListActivity extends AppCompatActivity {
                 quantities.add((int) foodItems.get(itemname[i]));
             }
 
-
             adapter=new CustomListAdapter(this, itemname, imgid, quantities);
             list=(ListView)findViewById(R.id.list);
             list.setAdapter(adapter);
-
 
         }
 
@@ -93,41 +85,6 @@ public class ListActivity extends AppCompatActivity {
             list.setAdapter(adapter);
         }
 
-    /*
-    public void onPlusClicked(View view) {
-        // Is the view now checked?
-        String foodItem = ((Button) view).getTag().toString();
-        TextView quantity = (TextView) ((View) view.getParent()).findViewById(R.id.textView2);
-        int currentQuantity = (int) foodItems.get(foodItem);
-        foodItems.put(foodItem, currentQuantity+1);
-        quantity.setText(String.valueOf(currentQuantity + 1));
-
-        //updateView();
-    }
-
-    public void onMinusClicked(View view) {
-        // Is the view now checked?
-        String foodItem = ((Button) view).getTag().toString();
-
-        int currentQuantity = (int) foodItems.get(foodItem);
-        if (currentQuantity > 0) {
-            foodItems.put(foodItem, currentQuantity - 1);
-            TextView quantity = (TextView) ((View) view.getParent()).findViewById(R.id.textView2);
-            quantity.setText(String.valueOf(currentQuantity - 1));
-            //updateView();
-        }
-    }
-
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-        String foodItem = ((CheckBox) view).getTag().toString();
-        if (checked == true)
-            foodItems.add(foodItem);
-        else
-            foodItems.remove(foodItem);
-    }
-    */
     /** Called when the user clicks the Submit button */
     public void sendMessage(View view) {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
