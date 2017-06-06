@@ -1,10 +1,13 @@
 package org.centrestfoodpantry.pantryApp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +16,10 @@ public class SetInventoryActivity extends AppCompatActivity {
 
     public static final String PREFS_NAME = "MyPrefsFile";
     ArrayList<CheckBox> checkBoxes = new ArrayList<>();
+    ArrayList<String> foodNames = new ArrayList<>();
+    ArrayList<Integer> foodImages = new ArrayList<>();
 
-    String[] itemname ={
+    String[] initialFoodNames = {
             "Milk",
             "Yogurt",
             "Eggs",
@@ -28,10 +33,10 @@ public class SetInventoryActivity extends AppCompatActivity {
             "Chicken Drumsticks",
             "Chicken Breasts",
             "Fish Fillet",
-            "Cheese Ravioli"
+            "Cheese Ravioli",
     };
 
-    Integer[] imgid={
+    Integer[] initialFoodImages = {
             R.drawable.milk,
             R.drawable.yogurt, R.drawable.eggs, R.drawable.broccoli, R.drawable.hummus,
             R.drawable.mozzarella_cheese, R.drawable.american_cheese,
@@ -52,19 +57,24 @@ public class SetInventoryActivity extends AppCompatActivity {
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_set_inventory);
 
-        for (int i = 0; i < itemname.length; i++) { // create checkboxes for all foods
+        for (int i = 0; i < initialFoodNames.length; i++) {
+            foodNames.add(initialFoodNames[i]);
+            foodImages.add(initialFoodImages[i]);
+        }
+
+        for (int i = 0; i < initialFoodNames.length; i++) { // create checkboxes for all foods
             CheckBox checkBox = new CheckBox(this);
-            checkBox.setText(itemname[i]);
-            checkBox.setTag(imgid[i]);
+            checkBox.setText(initialFoodNames[i]);
+            checkBox.setTag(initialFoodImages[i]);
             checkBox.setTextSize(24);
 
-            if (foodItems.containsKey(itemname)) { // if CheckBox previously checked as per SharedPref, check the box
+            if (foodItems.containsKey(initialFoodNames[i])) { // if CheckBox previously checked as per SharedPref, check the box
                 checkBox.setChecked(true);
             }
             checkBoxes.add(checkBox);
             layout.addView(checkBox);
         }
-       }
+    }
 
     @Override
     public void onResume() {
@@ -83,7 +93,7 @@ public class SetInventoryActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
 
         // We need an Editor object to make preference changes.
@@ -122,7 +132,23 @@ public class SetInventoryActivity extends AppCompatActivity {
         // Commit the edits!
         editor.commit();
     }
+
+    /**
+     * Called when the user clicks the Submit button
+     **/
+    public void addFood(View view) {
+        EditText newFoodText = (EditText) findViewById(R.id.new_food);
+        String newFood = newFoodText.getText().toString();
+        foodNames.add(newFood);
+        foodImages.add(R.drawable.broccoli);
+
+        CheckBox checkBox = new CheckBox(this);
+        checkBox.setText(newFood);
+        checkBox.setTag(R.drawable.broccoli);
+        checkBox.setTextSize(24);
+
+        checkBoxes.add(checkBox);
+        ViewGroup layout = (ViewGroup) findViewById(R.id.activity_set_inventory);
+        layout.addView(checkBox);
+    }
 }
-
-
-

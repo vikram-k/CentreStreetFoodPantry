@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,5 +17,11 @@
             android:layout_height="wrap_content"
             android:text="@string/button_setInventory"
             android:onClick="setInventory" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_connectBT"
+            android:onClick="connectBT" />
 
 </LinearLayout>

@@ -6,5 +6,8 @@
     <string name="button_print">Print Order</string>
     <string name="button_newOrder">Create New Order</string>
     <string name="button_setInventory">Set Inventory</string>
+    <string name="button_connectBT">Connect Bluetooth</string>
     <string name="button_quantity">1</string>
+    <string name="newFood_message">Enter New Food Name</string>
+    
 </resources>
