@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SetInventoryActivity extends AppCompatActivity {
 
@@ -21,29 +25,38 @@ public class SetInventoryActivity extends AppCompatActivity {
 
     String[] initialFoodNames = {
             "Milk",
+            "Soy Milk",
             "Yogurt",
             "Eggs",
             "Broccoli",
             "Hummus",
+            "Tofu",
+
             "Mozzarella Cheese",
             "American Cheese",
             "Cheddar Cheese",
+
+            "Ground Turkey",
             "Whole Chicken",
             "Chicken Thighs",
             "Chicken Drumsticks",
             "Chicken Breasts",
             "Fish Fillet",
             "Cheese Ravioli",
+            "Ground Beef",
+            "Turkey Burgers"
     };
 
     Integer[] initialFoodImages = {
-            R.drawable.milk,
-            R.drawable.yogurt, R.drawable.eggs, R.drawable.broccoli, R.drawable.hummus,
-            R.drawable.mozzarella_cheese, R.drawable.american_cheese,
-            R.drawable.cheddar_cheese,
+            R.drawable.milk, R.drawable.soy_milk,
+            R.drawable.yogurt, R.drawable.eggs, R.drawable.broccoli, R.drawable.hummus, R.drawable.tofu,
+
+            R.drawable.mozzarella_cheese, R.drawable.american_cheese, R.drawable.cheddar_cheese,
+
+            R.drawable.groundturkey,
             R.drawable.wholechicken, R.drawable.chicken_thighs,
             R.drawable.chicken_drumsticks, R.drawable.chickenbreast, R.drawable.fish_fillet,
-            R.drawable.broccoli
+            R.drawable.cheese_ravioli, R.drawable.groundbeef, R.drawable.turkey_burgers
 
     };
 
@@ -54,6 +67,13 @@ public class SetInventoryActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         HashMap<String, Integer> foodItems = (HashMap<String, Integer>) settings.getAll(); // restore saved foods
+        String foodArray [];
+        foodArray = Arrays.copyOf(foodItems.keySet().toArray(), foodItems.keySet().toArray().length, String[].class);
+        for (int i = 0; i < foodArray.length; i++) {
+            foodArray[i] = foodArray[i].substring(3);
+        }
+
+        Set<String> foodSet = new HashSet<String>(Arrays.asList(foodArray));
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_set_inventory);
 
@@ -68,7 +88,7 @@ public class SetInventoryActivity extends AppCompatActivity {
             checkBox.setTag(initialFoodImages[i]);
             checkBox.setTextSize(24);
 
-            if (foodItems.containsKey(initialFoodNames[i])) { // if CheckBox previously checked as per SharedPref, check the box
+            if (foodSet.contains(initialFoodNames[i])) { // if CheckBox previously checked as per SharedPref, check the box
                 checkBox.setChecked(true);
             }
             checkBoxes.add(checkBox);
@@ -83,10 +103,18 @@ public class SetInventoryActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         HashMap<String, Integer> foodItems = (HashMap<String, Integer>) settings.getAll();
 
+        String foodArray [];
+        foodArray = Arrays.copyOf(foodItems.keySet().toArray(), foodItems.keySet().toArray().length, String[].class);
+        for (int i = 0; i < foodArray.length; i++) {
+            foodArray[i] = foodArray[i].substring(3);
+        }
+
+        Set<String> foodSet = new HashSet<String>(Arrays.asList(foodArray));
+
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_set_inventory);
 
         for (CheckBox checkBox : checkBoxes) {
-            if (foodItems.containsKey(checkBox.getText())) {
+            if (foodSet.contains(checkBox.getText())) {
                 checkBox.setChecked(true);
             }
         }
@@ -122,10 +150,11 @@ public class SetInventoryActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.clear();
-
+        int num = 0;
         for (CheckBox checkBox : checkBoxes) { // Store checked foods in SharedPref
             if (checkBox.isChecked() == true) {
-                editor.putInt(checkBox.getText().toString(), (int) checkBox.getTag());
+                editor.putInt(String.format("%03d", num) + checkBox.getText().toString(), (int) checkBox.getTag());
+                num += 1;
             }
         }
 

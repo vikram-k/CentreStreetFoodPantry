@@ -39,7 +39,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         for (Object item : foodItems.keySet()) {
             int quantity = (int) foodItems.get(item);
             if (quantity != 0) {
-                outputPrint += "\n" + item.toString();
+                outputPrint += "\n" + item.toString().substring(3);
                 if (quantity > 1) {
                     outputPrint += " (" + quantity + ")";
                 }
@@ -81,7 +81,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         for (Object item : foodItems.keySet()) {
             int quantity = (int) foodItems.get(item);
             if (quantity != 0) {
-                hsBluetoothPrintDriver.BT_Write("\n" + item.toString());
+                hsBluetoothPrintDriver.BT_Write("\n" + item.toString().substring(3));
                 if (quantity > 1) {
                     hsBluetoothPrintDriver.BT_Write(" (" + quantity + ")");
                 }

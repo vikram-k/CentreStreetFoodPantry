@@ -9,7 +9,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,10 +40,13 @@ public class ListActivity extends AppCompatActivity {
             // Get names and images for available foods from inventory SharedPreferences
             HashMap<String, Integer> foodItems = (HashMap) settings.getAll();
             itemname = foodItems.keySet().toArray(new String[foodItems.keySet().size()]);
+            Arrays.sort(itemname);
 
             Object[] imgIdObjects = foodItems.values().toArray();
-            for (int i = 0; i < imgIdObjects.length; i++) {
-                imgid[i] = (Integer) imgIdObjects[i];
+            Arrays.sort(imgIdObjects);
+
+            for (int i = 0; i < foodItems.size(); i++) {
+                imgid[i] = (Integer) foodItems.get(itemname[i]);
             }
 
             for (String s: itemname) {
