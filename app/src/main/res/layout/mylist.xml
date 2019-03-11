@@ -42,13 +42,14 @@
             android:id="@+id/item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium Text"
+            android:text="Large Text"
+            android:textSize="24sp"
             android:textIsSelectable="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:padding="2dp"
-            android:textColor="#33CC33" />
+            android:textColor="#191970" />
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"

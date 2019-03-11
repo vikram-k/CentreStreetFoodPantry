@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.rtdriver.driver.Contants;
 import com.rtdriver.driver.HsBluetoothPrintDriver;
@@ -36,17 +37,22 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user clicks the Connect Bluetooth button */
     public void connectBT(View view) {
+
+
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-        String macAddress = "00:0E:0E:0C:12:69";
+            
+        String macAddress = "00:0E:0E:0B:B4:2B";
 
         mBluetoothDevice = adapter.getRemoteDevice(macAddress);
-        connectBluetooth(mBluetoothDevice);
-    }
-
-    private void connectBluetooth(BluetoothDevice bluetoothDevice) {
         HsBluetoothPrintDriver hsBluetoothPrintDriver = HsBluetoothPrintDriver.getInstance();
         hsBluetoothPrintDriver.start();
-        hsBluetoothPrintDriver.connect(bluetoothDevice);
+        hsBluetoothPrintDriver.connect(mBluetoothDevice);
+    }
+
+    /** Called when the user clicks the Set Inventory button */
+    public void numberLottery(View view) {
+        Intent intent = new Intent(this, NumberLotteryActivity.class);
+        startActivity(intent);
     }
 
 }

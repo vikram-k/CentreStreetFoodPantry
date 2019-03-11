@@ -1,25 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Centre Street Food Pantry</string>
-    <string name="name_message">Shopper Name</string>
-    <string name="size_message">Family Size</string>
-    <string name="button_send">Submit</string>
-    <string name="button_print">Print Order</string>
-    <string name="button_newOrder">Create New Order</string>
-    <string name="button_setInventory">Set Inventory</string>
-    <string name="button_connectBT">Connect Bluetooth</string>
-    <string name="button_quantity">1</string>
-    <string name="newFood_message">Enter New Food Name</string>
-    <string name="button_mainMenu">Main Menu</string>
-    <string name="button_chinese">Chinese</string>
-
-    <string-array name="foodNames">
+    <string-array name="englishFoods">
         <item>Milk</item>
         <item>Soy Milk</item>
+        <item>Almond Milk</item>
         <item>Yogurt</item>
+        <item>Plain Yogurt</item>
+        <item>Strawberry Yogurt</item>
         <item>Eggs</item>
         <item>Whipped Cream</item>
+        <item>Soft Spread</item>
         <item>Broccoli</item>
         <item>Hummus</item>
+        <item>Salad Dressing</item>
+        <item>Chicken Noodle Soup</item>
+        <item>Salad</item>
+        <item>Sandwich</item>
+
 
         <item>Mozzarella Cheese</item>
         <item>American Cheese</item>
@@ -31,6 +28,7 @@
         <item>Chicken Thighs</item>
         <item>Chicken Drumsticks</item>
         <item>Chicken Breasts</item>
+        <item>Chicken Leg Quarters</item>
 
         <item>Fish Fillet</item>
         <item>Fish Sticks</item>
@@ -40,8 +38,8 @@
         <item>Turkey Burgers</item>
         <item>Pork Tenderloin</item>
         <item>Hot Dogs</item>
+        <item>Hamburger Patties</item>
         <item>Italian Sausage</item>
         <item>Italian Meatballs</item>
     </string-array>
-
 </resources>

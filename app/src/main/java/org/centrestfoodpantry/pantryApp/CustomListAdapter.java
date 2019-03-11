@@ -1,6 +1,7 @@
 package org.centrestfoodpantry.pantryApp;
 
         import android.app.Activity;
+        import android.content.SharedPreferences;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     private final String[] itemname;
     private final Integer[] imgid;
     private final ArrayList<Integer> quantities;
+    public static final String FOOD_COUNTS_PREFS = "FoodCountsFile";
 
 
     public CustomListAdapter(Activity context, String[] itemname, Integer[] imgid, ArrayList<Integer> quantities) {
@@ -62,6 +64,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
                 TextView quantity = (TextView) ((View) v.getParent()).findViewById(R.id.textView2);
                 quantities.set(position, quantities.get(position) + 1);
                 quantity.setText(String.valueOf(quantities.get(position)));
+
             }
         });
 
@@ -79,8 +82,8 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
 
 
-        holder.item.setText(itemname[position]);
-        holder.item.setTextSize(28);
+        holder.item.setText(itemname[position].substring(3));
+        holder.item.setTextSize(36);
         holder.img.setImageResource(imgid[position]);
         holder.code.setText(quantities.get(position).toString());
 

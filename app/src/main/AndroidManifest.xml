@@ -21,6 +21,8 @@
         <activity android:name=".DisplayMessageActivity" />
         <activity android:name=".ListActivity" />
         <activity android:name=".SetInventoryActivity"></activity>
+        <activity android:name=".NumberLotteryActivity" />
+        <activity android:name=".RandomNumberActivity" />
     </application>
 
 </manifest>

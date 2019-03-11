@@ -1,6 +1,8 @@
 package org.centrestfoodpantry.pantryApp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,8 @@ import java.util.HashMap;
 
 import com.rtdriver.driver.HsBluetoothPrintDriver;
 
+import static com.rtdriver.driver.Contants.TYPE_80;
+
 public class DisplayMessageActivity extends AppCompatActivity {
 
     // constants
@@ -23,6 +27,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     String outputPrint ;
     String shopperName, familySize;
     HashMap foodItems;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +59,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_display_message);
         layout.addView(textView);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy-hh-mm");
-        String dateText = simpleDateFormat.format(new Date());
     }
 
 
@@ -72,11 +76,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
         hsBluetoothPrintDriver.SetAlignMode(flagZero);
         hsBluetoothPrintDriver.SetCharacterPrintMode(flagZero);
         hsBluetoothPrintDriver.SetUnderline(flagZero);
+
+        /*Bitmap bMap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+        hsBluetoothPrintDriver.printImage(bMap, TYPE_80);
+        */
+
+
         hsBluetoothPrintDriver.SetBold(flagOne);
         hsBluetoothPrintDriver.BT_Write("Name: " + shopperName + "\n" + "Family Size: " + familySize + "\n");
         hsBluetoothPrintDriver.SetBold(flagZero);
-        //byte flagEnlargeSize = 0100;
-        //hsBluetoothPrintDriver.SetFontEnlarge(flagEnlargeSize);
 
         for (Object item : foodItems.keySet()) {
             int quantity = (int) foodItems.get(item);
@@ -88,13 +96,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         }
 
-        hsBluetoothPrintDriver.CR();
-        hsBluetoothPrintDriver.LF();
-        hsBluetoothPrintDriver.CR();
-        hsBluetoothPrintDriver.LF();
-        hsBluetoothPrintDriver.CR();
-        hsBluetoothPrintDriver.LF();
-        hsBluetoothPrintDriver.CR();
+        // print date at top of receipt
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM d, yyyy h:mm a");
+        String dateText = simpleDateFormat.format(new Date());
+        //hsBluetoothPrintDriver.BT_Write("\n\n" + dateText);
+
+        for (int i = 0; i < 6; i++) {  // add blank lines at bottom of receipt
+            hsBluetoothPrintDriver.CR();
+        }
+
 
     }
 
@@ -103,5 +113,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         textPrintBT(outputPrint);
     }
 
+    /** Called when the user clicks the Main Menu button */
+    public void mainActivity(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
 

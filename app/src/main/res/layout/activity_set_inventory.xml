@@ -28,6 +28,10 @@
             android:text="@string/button_send"
             android:onClick="addFood" />
 
+        <CheckBox android:id="@+id/checkbox_chinese"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_chinese" />
         </LinearLayout>
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package org.centrestfoodpantry.pantryApp;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,20 +9,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.rtdriver.driver.HsBluetoothPrintDriver;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ListActivity extends AppCompatActivity {
 
         String shopperName = "";
         String familySize = "";
         HashMap foodItems = new HashMap();
-        ArrayList<Integer> quantities = new ArrayList<Integer>();
+        ArrayList<Integer> quantities = new ArrayList<>();
         CustomListAdapter adapter;
 
         ListView list;
@@ -109,7 +108,7 @@ public class ListActivity extends AppCompatActivity {
         intent.putExtra("ORDER_INFO", orderInfo);
 
         startActivity(intent);
-
     }
+
 }
 

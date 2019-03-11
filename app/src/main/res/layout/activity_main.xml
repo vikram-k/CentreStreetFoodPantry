@@ -24,4 +24,10 @@
             android:text="@string/button_connectBT"
             android:onClick="connectBT" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Random Lottery"
+            android:onClick="numberLottery" />
+
 </LinearLayout>
